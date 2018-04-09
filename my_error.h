@@ -1,5 +1,20 @@
-#include <errno.h> /* for definition of errno */
+/**
+ * @Author: YangGuang <sunshine>
+ * @Date:   2018-04-08T21:57:10+08:00
+ * @Email:  guang334419520@126.com
+ * @Filename: my_error.h
+ * @Last modified by:   sunshine
+ * @Last modified time: 2018-04-09T15:06:07+08:00
+ */
+
+
+
 #include <stdarg.h> /* ISO C variable aruments */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h> /* for definition of errno */
+#define MAXLINE 4096
 
 static void err_doit(int, int, const char *, va_list);
 
@@ -26,7 +41,6 @@ void
 err_sys(const char *fmt, ...)
 {
     va_list ap;
-
     va_start(ap, fmt);
     err_doit(1, errno, fmt, ap);
     va_end(ap);
@@ -106,7 +120,7 @@ err_quit(const char *fmt, ...)
 static void
 err_doit(int errnoflag, int error, const char *fmt, va_list ap)
 {
-    char buf[MAXLINE];
+   char buf[MAXLINE];
    vsnprintf(buf, MAXLINE, fmt, ap);
    if (errnoflag)
        snprintf(buf+strlen(buf), MAXLINE-strlen(buf), ": %s",

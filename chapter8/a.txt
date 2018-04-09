@@ -1,0 +1,5 @@
+a wirte to stdout
+before fork
+pid = 2515, glob = 8, var = 89
+before fork
+pid = 2514, glob = 7, var = 88
